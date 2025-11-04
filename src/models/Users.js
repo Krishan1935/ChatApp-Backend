@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import {randomUUID} from "crypto";
 
 const userSchema = new Schema({
     email: {
@@ -28,7 +29,17 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required'],
     },
+    token: {
+        type: Schema.Types.UUID,
+        trim: true,
+        default: ()=> randomUUID(),
+    },
+    token_expires_at: {
+        type: Date,
+        default: ()=>Date.now() + 24*60*60*1000,
+        required: true
+    }
 })
 
-const userModel =  mongoose.models("USERS") || mongoose.model("USERS", userSchema);
+const userModel =  mongoose.models.USERS || mongoose.model("USERS", userSchema);
 export default userModel;
