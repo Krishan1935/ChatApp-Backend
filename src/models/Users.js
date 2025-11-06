@@ -30,14 +30,19 @@ const userSchema = new Schema({
         required: [true, 'Password is required'],
     },
     token: {
-        type: Schema.Types.UUID,
+        type: String,
         trim: true,
-        default: ()=> randomUUID(),
+        required: true
     },
     token_expires_at: {
         type: Date,
         default: ()=>Date.now() + 24*60*60*1000,
         required: true
+    },
+    email_verified:{
+        type: Boolean,
+        required: true,
+        default: false,
     }
 })
 

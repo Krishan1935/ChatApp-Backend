@@ -1,5 +1,6 @@
 // packages
 import e from "express";
+import cookieParser from "cookie-parser";
 
 // config
 import connectDB from "./config/db.js";
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 4000;
 
 const app = e();
 app.use(e.json());
+app.use(cookieParser());
 
 app.use('/auth', authRouter);
 
